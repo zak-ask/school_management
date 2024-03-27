@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class FiliereDao {
+public class EtudiantDao {
     private final Connection conn = SingeltonConnection.getConnection();
     public Filiere findById(Long id) {
         try {
@@ -59,6 +59,17 @@ public class FiliereDao {
             PreparedStatement ps = conn.prepareStatement("INSERT INTO filieres(libelle, discription) VALUES(?1,?2)");
             ps.setString(1, filiere.getLibelle());
             ps.setString(2, filiere.getDescription());
+            return ps.executeUpdate();
+        }catch (SQLException e){
+            throw new RuntimeException("Error :"+e.getCause());
+        }
+    }
+    public int update(Filiere filiere){
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE filieres SET libelle =?1 , discription=?2, WHERE id=?3");
+            ps.setString(1, filiere.getLibelle());
+            ps.setString(2, filiere.getDescription());
+            ps.setLong(3, filiere.getId());
             return ps.executeUpdate();
         }catch (SQLException e){
             throw new RuntimeException("Error :"+e.getCause());

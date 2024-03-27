@@ -9,10 +9,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class Personne {
+/**
+ * Table 'utilisateurs'
+ */
+public abstract class Utilisateur {
     private Integer id;
-    private String firstName;
-    private String lastName;
+    private String nom;
+    private String prenom;
     private String password;
     private String email;
 }

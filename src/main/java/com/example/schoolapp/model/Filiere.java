@@ -1,9 +1,6 @@
 package com.example.schoolapp.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -11,8 +8,12 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+/**
+ * Table 'filieres'
+ */
 public class Filiere {
-    private Integer id;
+    private Long id;
     private String libelle;
     private String description;
     private List<Etudiant> etudiantList;

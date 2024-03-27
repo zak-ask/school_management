@@ -1,5 +1,8 @@
 package com.example.schoolapp.model;
 
-public class Admin extends Personne {
+/**
+ * Table 'admins'
+ */
+public class Admin extends Utilisateur {
     private Integer id;
 }

@@ -1,6 +1,7 @@
 package com.example.schoolapp.dao;
 
 import com.example.schoolapp.config.SingeltonConnection;
+import com.example.schoolapp.model.Admin;
 import com.example.schoolapp.model.Filiere;
 import com.example.schoolapp.utils.PageRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class FiliereDao {
+public class AdminDao {
     private final Connection conn = SingeltonConnection.getConnection();
     public Filiere findById(Long id) {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM filieres WHERE id=?1");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM admin WHERE id=?1");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
@@ -35,7 +36,7 @@ public class FiliereDao {
     }
     public List<Filiere> findAll(PageRequest pageRequest){
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM filieres LIMIT ?1,?2");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM admin LIMIT ?1,?2");
             ps.setLong(1, pageRequest.getOffset());
             ps.setLong(1, pageRequest.getOffset() + pageRequest.getSize());
             ResultSet rs = ps.executeQuery();
@@ -54,11 +55,23 @@ public class FiliereDao {
         }
     }
 
-    public int create(Filiere filiere){
+    public int create(Admin admin){
         try {
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO filieres(libelle, discription) VALUES(?1,?2)");
+            // todo create admin should create first row in users table then into admins table.
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO utilisateurs(nom, prenom, email,password) VALUES(?1,?2)");
+            ps.setString(1, admin.getNom());
+            ps.setString(2, admin.getPrenom());
+            return ps.executeUpdate();
+        }catch (SQLException e){
+            throw new RuntimeException("Error :"+e.getCause());
+        }
+    }
+    public int update(Filiere filiere){
+        try {
+            PreparedStatement ps = conn.prepareStatement("UPDATE admin SET libelle =?1 , discription=?2, WHERE id=?3");
             ps.setString(1, filiere.getLibelle());
             ps.setString(2, filiere.getDescription());
+            ps.setLong(3, filiere.getId());
             return ps.executeUpdate();
         }catch (SQLException e){
             throw new RuntimeException("Error :"+e.getCause());
@@ -66,7 +79,7 @@ public class FiliereDao {
     }
     public int delete(Filiere filiere){
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM filieres WHERE id = ?1");
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM admin WHERE id = ?1");
             ps.setString(1, filiere.getLibelle());
             return ps.executeUpdate();
         }catch (SQLException e){
