@@ -17,5 +17,5 @@ public class Filiere {
     private String libelle;
     private String description;
     private List<Etudiant> etudiantList;
-    private List<FiliereSemestre> filiereSemestreList;
+    private List<Programme> programmeList;
 }

@@ -7,9 +7,8 @@ import java.sql.DriverManager;
 import java.util.ResourceBundle;
 
 public class SingeltonConnection {
-        @Getter
-        private static Connection connection;
-        static {
+        private static Connection connection = null;
+        private SingeltonConnection(){
             ResourceBundle bundle = ResourceBundle.getBundle("application");
             String dbUrl = bundle.getString("db.url");
             String dbUsername = bundle.getString("db.username");
@@ -27,5 +26,13 @@ public class SingeltonConnection {
                 e.printStackTrace();
             }
         }
+
+        public static Connection getConnection(){
+            if (connection == null){
+                SingeltonConnection singeltonConnection = new SingeltonConnection();
+            }
+            return connection;
+        }
+
 }
 
