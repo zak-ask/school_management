@@ -11,6 +11,30 @@
     <title>login</title>
 </head>
 <body>
-<h1>djkdkdkdk</h1>
+<div class="container">
+    <h2>Student Details</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Grade</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through the students and generate table rows -->
+        <c:forEach items="${students}" var="student">
+            <tr>
+                <td>${student.id}</td>
+                <td>${student.name}</td>
+                <td>${student.age}</td>
+                <td>${student.grade}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>

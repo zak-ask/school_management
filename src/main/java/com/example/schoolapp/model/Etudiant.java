@@ -1,15 +1,18 @@
 package com.example.schoolapp.model;
 
+import lombok.*;
+
 import java.util.List;
 
 /**
  * table 'Etudiants'
  */
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter @Setter
 public class Etudiant extends Utilisateur {
-    private Integer id;
     private String cin;
-    private String sexe;
-    private String phone;
+    private int age;
     private Filiere filiere;
     private List<Note> notes;
 }

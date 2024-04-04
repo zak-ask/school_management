@@ -3,7 +3,6 @@ package com.example.schoolapp.dao;
 import com.example.schoolapp.config.SingeltonConnection;
 import com.example.schoolapp.model.Filiere;
 import com.example.schoolapp.utils.PageRequest;
-import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
 public class FiliereDao {
     private final Connection conn = SingeltonConnection.getConnection();
     public Filiere findById(Long id) {

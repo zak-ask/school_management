@@ -14,5 +14,5 @@ import java.util.List;
 public class Semestre {
     private Integer id;
     private String libelle;
-    private List<FiliereSemestre> filiereSemestres;
+    private List<Programme> programmeList;
 }
