@@ -1,40 +1,66 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: zakaria
-  Date: 3/3/2024
-  Time: 4:32 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/logcss.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+    <title>Login | page </title>
+    <style>
+      /* Customize as needed */
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h2>Student Details</h2>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Grade</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Loop through the students and generate table rows -->
-        <c:forEach items="${students}" var="student">
-            <tr>
-                <td>${student.id}</td>
-                <td>${student.name}</td>
-                <td>${student.age}</td>
-                <td>${student.grade}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
-
+    <section class="vh-100">
+        
+        <div class="container py-5 h-100">
+          <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+              <img src="image/signe.png"
+                class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <h2>Login page</h2>
+              <form>
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <input type="email" id="form1Example13" class="form-control form-control-lg" />
+                  <label class="form-label" for="form1Example13">Email address</label>
+                </div>
+      
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <input type="password" id="form1Example23" class="form-control form-control-lg" />
+                  <label class="form-label" for="form1Example23">Password</label>
+                </div>
+      
+                <div class="d-flex justify-content-around align-items-center mb-4">
+                  <!-- Checkbox -->
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                    <label class="form-check-label" for="form1Example3"> Remember me </label>
+                  </div>
+                  <a href="#!">Forgot password?</a>
+                </div>
+      
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button><br><br>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/" role="button">Back to Home</a>
+      
+                <div class="divider d-flex align-items-center my-4">
+                  <p class="text-center fw-bold mx-3 mb-0 text-muted">Created by Ensa genius</p>
+                  <a type="button" class="btn btn-outline-primary" href="${pageContext.request.contextPath}/register">Signe Up</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
 </body>
 </html>

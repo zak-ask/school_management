@@ -5,13 +5,14 @@ import com.example.schoolapp.dto.PageDTO;
 import com.example.schoolapp.metier.IEtudiantMetier;
 import com.example.schoolapp.model.Etudiant;
 import com.example.schoolapp.utils.PageRequest;
-
+import com.example.schoolapp.utils.PasswordHashing;
 
 
 public class EtudiantMetierImpl implements IEtudiantMetier {
-    private EtudiantDao dao = new EtudiantDao();
+    private final EtudiantDao dao;
 
     public EtudiantMetierImpl() {
+        this.dao = new EtudiantDao();
     }
 
     @Override
@@ -26,6 +27,7 @@ public class EtudiantMetierImpl implements IEtudiantMetier {
 
     @Override
     public Etudiant create(Etudiant dto) {
+        dto.setPassword(PasswordHashing.hashPassword(dto.getPassword()));
         return dao.create(dto);
     }
 

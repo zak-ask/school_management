@@ -53,10 +53,10 @@ public class AdminDao {
         }
     }
 
-    public int create(Admin admin){
+    public long create(Admin admin){
         try {
             // todo create admin should create first row in users table then into admins table.
-            int operationStatus;
+            long operationStatus;
             PreparedStatement ps1 = conn.prepareStatement("INSERT INTO utilisateurs(nom, prenom, email,password) VALUES(?1,?2)");
             ps1.setString(1, admin.getNom());
             ps1.setString(2, admin.getPrenom());
@@ -71,7 +71,7 @@ public class AdminDao {
                         System.out.println("Generated ID: " + id);
                     } else {
                         System.out.println("Failed to retrieve generated ID.");
-                        return 0;
+                        return 0L;
                     }
                 }
             } else {
@@ -81,7 +81,7 @@ public class AdminDao {
         }catch (SQLException e){
             throw new RuntimeException("Error :"+e.getCause());
         }
-        return 0;
+        return 0L;
     }
     public int update(Filiere filiere){
         try {

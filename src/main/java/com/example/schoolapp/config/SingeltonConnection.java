@@ -28,8 +28,13 @@ public class SingeltonConnection {
         }
 
         public static Connection getConnection(){
-            if (connection == null){
-                SingeltonConnection singeltonConnection = new SingeltonConnection();
+            if (connection == null) {
+                // Create a new instance only if it's not initialized yet
+                synchronized (SingeltonConnection.class) {
+                    if (connection == null) {
+                        new SingeltonConnection();
+                    }
+                }
             }
             return connection;
         }

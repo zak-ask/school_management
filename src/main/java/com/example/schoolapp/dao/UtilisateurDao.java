@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 public class UtilisateurDao {
+
     private final Connection conn = SingeltonConnection.getConnection();
     public Utilisateur findByEmail(String email){
         try {
