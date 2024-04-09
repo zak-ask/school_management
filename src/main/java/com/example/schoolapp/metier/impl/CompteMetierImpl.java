@@ -32,8 +32,7 @@ public class CompteMetierImpl implements ICompteMetier {
     public Utilisateur create(Utilisateur dto) {
         // hash password
         dto.setPrenom(PasswordHashing.hashPassword(dto.getPassword()));
-        Long id = dao.create(dto);
-        dto.setId(id);
+        dao.create(dto);
         return dto;
     }
 

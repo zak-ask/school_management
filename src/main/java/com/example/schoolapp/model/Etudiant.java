@@ -12,7 +12,6 @@ import java.util.List;
 @Getter @Setter
 public class Etudiant extends Utilisateur {
     private String cin;
-    private int age;
     private Filiere filiere;
     private List<Note> notes;
 }

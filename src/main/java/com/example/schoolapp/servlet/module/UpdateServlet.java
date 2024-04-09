@@ -1,9 +1,11 @@
-package com.example.schoolapp.servlet.filiere;
+package com.example.schoolapp.servlet.module;
 
 import com.example.schoolapp.metier.FiliereMetierImpl;
 import com.example.schoolapp.metier.IFiliereMetier;
-import com.example.schoolapp.model.Etudiant;
+import com.example.schoolapp.metier.IModuleMetier;
+import com.example.schoolapp.metier.impl.ModuleMetierImpl;
 import com.example.schoolapp.model.Filiere;
+import com.example.schoolapp.model.Module;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,12 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "filiereUpdateServlet", value = "/filieres/edit")
+@WebServlet(name = "moduleUpdateServlet", value = "/modules/edit")
 public class UpdateServlet extends HttpServlet {
-    private IFiliereMetier filiereMetier;
+    private IModuleMetier moduleMetier;
 
     public void init() {
-        filiereMetier = new FiliereMetierImpl();
+        moduleMetier = new ModuleMetierImpl();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
@@ -27,8 +29,8 @@ public class UpdateServlet extends HttpServlet {
         // Forward the request to the JSP page
         Long id = request.getParameter("id") != null ? Long.valueOf(request.getParameter("id")) :
                 null;
-        request.setAttribute("filiere",filiereMetier.get(id));
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/filiere/modifier.jsp");
+        request.setAttribute("module",moduleMetier.get(id));
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/module/modifier.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -38,14 +40,15 @@ public class UpdateServlet extends HttpServlet {
         Long id = Long.valueOf(req.getParameter("id"));
         String libelle = req.getParameter("libelle");
         String description = req.getParameter("description");
+        String semestre = req.getParameter("semestre");
+        Long filiereId = Long.valueOf(req.getParameter("filiere_id"));
 
         // Create Etudiant object
-        Filiere filiere = new Filiere();
-        filiere.setLibelle(libelle);
-        filiere.setDescription(description);
-
-        // Pass the Etudiant object to your service method
-        filiereMetier.update(filiere,id); // Replace with your actual service method
-        resp.sendRedirect(req.getContextPath() + "/filieres");
+        Module module = new Module();
+        module.setLibelle(libelle);
+        module.setDescription(description);
+        module.setSemestre(semestre);
+        moduleMetier.update(module,id); // Replace with your actual service method
+        resp.sendRedirect(req.getContextPath() + "/modules");
     }
 }

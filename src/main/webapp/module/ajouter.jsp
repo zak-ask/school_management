@@ -19,20 +19,12 @@
     <jsp:include page="../navbar.jsp"/>
     <main class="content px-3 py-2">
       <div class="container-fluid">
-        <h1 class="my-5">Ajouter un etudiant</h1>
-        <form method="post" action="${pageContext.request.contextPath}/etudiants/create" class="row g-3">
+        <h1 class="my-5">Ajouter module</h1>
+        <form method="post" action="${pageContext.request.contextPath}/modules/create" class="row g-3">
 
           <div class="mb-3 col-md-6">
-            <label for="nom" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="nom" name="nom" required>
-          </div>
-          <div class="mb-3 col-md-6">
-            <label for="prenom" class="form-label">Prénom</label>
-            <input type="text" class="form-control" id="prenom" name="prenom" required>
-          </div>
-          <div class="mb-3 col-md-6">
-            <label for="cin" class="form-label">CIN</label>
-            <input type="text" class="form-control" id="cin" name="cin" required>
+            <label for="libelle" class="form-label">Libelle</label>
+            <input type="text" class="form-control" id="libelle" name="libelle" required>
           </div>
           <div class="mb-3 col-md-6">
             <label for="filiere" class="form-label">Filiere</label>
@@ -43,17 +35,16 @@
             </select>
           </div>
           <div class="mb-3 col-md-6">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required>
+            <label for="semestre" class="form-label">Semestre</label>
+            <select name="semestreId" id="semestre" class="form-select">
+                <c:forEach var="semester" items="${semesters}">
+                    <option value="${semester}">${semester}</option>
+                </c:forEach>
+            </select>
           </div>
-          <div class="mb-3 col-md-6">
-            <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-          </div>
-
           <div class="col-12 d-flex m-4 gap-4">
             <button type="submit" class="btn btn-primary px-4">Ajouter</button>
-            <a href="${pageContext.request.contextPath}/etudiants" type="submit" class="btn btn-danger px-4 ">Annuler</a>
+            <a href="${pageContext.request.contextPath}/modules" type="submit" class="btn btn-danger px-4 ">Annuler</a>
           </div>
         </form>
       </div>

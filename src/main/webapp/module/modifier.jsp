@@ -19,20 +19,17 @@
     <jsp:include page="../navbar.jsp"/>
     <main class="content px-3 py-2">
       <div class="container-fluid">
-        <h1 class="my-5">Ajouter un etudiant</h1>
-        <form method="post" action="${pageContext.request.contextPath}/etudiants/create" class="row g-3">
-          <input type="hidden" class="form-control" id="id" name="id" value="${etudiant.id}" required>
+        <h1 class="my-5">Modifier module</h1>
+        <form method="post" action="${pageContext.request.contextPath}/modules/edit" class="row g-3">
+
           <div class="mb-3 col-md-6">
-            <label for="nom" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="nom" name="nom" value="${etudiant.nom}" required>
+            <input type="hidden" class="form-control" id="id" name="id" value="${module.id}" required>
+            <label for="libelle" class="form-label">Libelle</label>
+            <input type="text" class="form-control" id="libelle" name="libelle" value="${module.libelle}" required>
           </div>
           <div class="mb-3 col-md-6">
-            <label for="prenom" class="form-label">Prénom</label>
-            <input type="text" class="form-control" id="prenom" name="prenom" value="${etudiant.prenom}" required>
-          </div>
-          <div class="mb-3 col-md-6">
-            <label for="cin" class="form-label">CIN</label>
-            <input type="text" class="form-control" id="cin" name="cin" value="${etudiant.nom}" required>
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" name="description" value="${module.description}" required>
           </div>
           <div class="mb-3 col-md-6">
             <label for="filiere" class="form-label">Filiere</label>
@@ -46,13 +43,24 @@
             </select>
           </div>
           <div class="mb-3 col-md-6">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="${etudiant.email}" readonly required>
+            <label for="semestre" class="form-label">Semestre</label>
+            <select name="semestreId" id="semestre" class="form-select">
+              <c:forEach var="semester" items="${semesters}">
+                <c:choose>
+                  <c:when test="${semester eq selectedSemester}">
+                    <option value="${semester}" selected>${semester}</option>
+                  </c:when>
+                  <c:otherwise>
+                    <option value="${semester}">${semester}</option>
+                  </c:otherwise>
+                </c:choose>
+              </c:forEach>
+            </select>
           </div>
 
           <div class="col-12 d-flex m-4 gap-4">
-            <a type="submit" class="btn btn-primary px-4">Ajouter</a>
-            <a href="${pageContext.request.contextPath}/etudiants" type="submit" class="btn btn-danger px-4 ">Annuler</a>
+            <button type="submit" class="btn btn-primary px-4">Modifier</button>
+            <a href="${pageContext.request.contextPath}/modules" type="submit" class="btn btn-danger px-4 ">Annuler</a>
           </div>
         </form>
       </div>

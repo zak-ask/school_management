@@ -1,6 +1,8 @@
 package com.example.schoolapp.servlet.filiere;
 
+import com.example.schoolapp.metier.FiliereMetierImpl;
 import com.example.schoolapp.metier.IEtudiantMetier;
+import com.example.schoolapp.metier.IFiliereMetier;
 import com.example.schoolapp.metier.impl.EtudiantMetierImpl;
 import com.example.schoolapp.model.Etudiant;
 import com.example.schoolapp.model.Filiere;
@@ -15,10 +17,10 @@ import java.io.IOException;
 
 @WebServlet(name = "filiereCreateServlet", value = "/filieres/create")
 public class CreateServlet extends HttpServlet {
-    private IEtudiantMetier etudiantMetier;
+    private IFiliereMetier filiereMetier;
 
     public void init() {
-        etudiantMetier = new EtudiantMetierImpl();
+        filiereMetier = new FiliereMetierImpl();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
@@ -31,26 +33,18 @@ public class CreateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            // Retrieve form data
-            String nom = req.getParameter("nom");
-            String prenom = req.getParameter("prenom");
-            String password = req.getParameter("password");
-            String email = req.getParameter("email");
-            String cin = req.getParameter("cin");
-            int age = Integer.parseInt(req.getParameter("age"));
-            Long filiereId = Long.valueOf(req.getParameter("filiereId"));
+        // Retrieve form data
+        String libelle = req.getParameter("libelle");
+        String description = req.getParameter("description");
 
-            // Create Etudiant object
-            Etudiant etudiant = new Etudiant();
-            etudiant.setNom(nom);
-            etudiant.setPrenom(prenom);
-            etudiant.setPassword(password);
-            etudiant.setEmail(email);
-            etudiant.setCin(cin);
-            etudiant.setAge(age);
-            etudiant.setFiliere(Filiere.builder().id(filiereId).build());
+        // Create Etudiant object
+        Filiere filiere = new Filiere();
+        filiere.setLibelle(libelle);
+        filiere.setDescription(description);
 
-            // Pass the Etudiant object to your service method
-            etudiantMetier.create(etudiant); // Replace with your actual service method
+        // Pass the Etudiant object to your service method
+        filiereMetier.create(filiere); // Replace with your actual service method
+        // Redirect the user to /filieres
+        resp.sendRedirect(req.getContextPath() + "/filieres");
     }
 }

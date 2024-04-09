@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Note {
     private Integer id;
-    private double note;
+    private Double note;
     private Etudiant etudiant;
-    private Programme programme;
+    private Module module;
 }

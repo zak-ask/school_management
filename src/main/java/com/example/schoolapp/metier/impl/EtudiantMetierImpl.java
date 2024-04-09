@@ -28,12 +28,19 @@ public class EtudiantMetierImpl implements IEtudiantMetier {
     @Override
     public Etudiant create(Etudiant dto) {
         dto.setPassword(PasswordHashing.hashPassword(dto.getPassword()));
+        dto.setEmail(dto.getEmail().toLowerCase());
         return dao.create(dto);
     }
 
     @Override
     public Etudiant update(Etudiant dto, Long id) {
-        return null;
+        int aff = dao.update(dto, id);
+        if (aff > 0){
+            dto.setId(id);
+            return dto;
+        }else{
+            throw new RuntimeException("Error");
+        }
     }
 
     @Override

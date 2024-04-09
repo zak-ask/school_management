@@ -1,7 +1,7 @@
-package com.example.schoolapp.servlet.etudiant;
+package com.example.schoolapp.servlet.module;
 
-import com.example.schoolapp.metier.IEtudiantMetier;
-import com.example.schoolapp.metier.impl.EtudiantMetierImpl;
+import com.example.schoolapp.metier.FiliereMetierImpl;
+import com.example.schoolapp.metier.IFiliereMetier;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "etListServlet", value = "/etudiants")
+@WebServlet(name = "moduleListServlet", value = "/modules")
 public class ListServlet extends HttpServlet {
-    private IEtudiantMetier etudiantMetier;
+    private IFiliereMetier moduleMetier;
 
     public void init() {
-        etudiantMetier = new EtudiantMetierImpl();
+        moduleMetier = new FiliereMetierImpl();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
@@ -25,11 +25,11 @@ public class ListServlet extends HttpServlet {
                 ? Integer.parseInt(request.getParameter("page")) : 1;
         int size = request.getParameter("size") != null
                 ? Integer.parseInt(request.getParameter("page")) : 10;
-        request.setAttribute("students", etudiantMetier.page(page, size));
+        request.setAttribute("modules", moduleMetier.page(page, size));
 
         // Forward the request to the JSP page
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/etudiant/list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/module/list.jsp");
         dispatcher.forward(request, response);
     }
 }

@@ -1,6 +1,8 @@
 package com.example.schoolapp.servlet.filiere;
 
+import com.example.schoolapp.metier.FiliereMetierImpl;
 import com.example.schoolapp.metier.IEtudiantMetier;
+import com.example.schoolapp.metier.IFiliereMetier;
 import com.example.schoolapp.metier.impl.EtudiantMetierImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -13,15 +15,19 @@ import java.io.IOException;
 
 @WebServlet(name = "filiereListServlet", value = "/filieres")
 public class ListServlet extends HttpServlet {
-    private IEtudiantMetier etudiantMetier;
+    private IFiliereMetier filiereMetier;
 
     public void init() {
-        etudiantMetier = new EtudiantMetierImpl();
+        filiereMetier = new FiliereMetierImpl();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
             ServletException {
-        request.setAttribute("students", etudiantMetier.page(1, 10));
+        int page = request.getParameter("page") != null
+                ? Integer.parseInt(request.getParameter("page")) : 1;
+        int size = request.getParameter("size") != null
+                ? Integer.parseInt(request.getParameter("page")) : 10;
+        request.setAttribute("filieres", filiereMetier.page(page, size));
 
         // Forward the request to the JSP page
 

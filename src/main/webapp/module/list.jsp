@@ -22,11 +22,11 @@
         <main class="content px-3 py-2">
             <div class="container-fluid">
                 <!-- oussama this place is the start of tab -->
-                <a href="${pageContext.request.contextPath}/etudiants/create" class="btn bg-primary mb-4">Ajouter Etudiant</a>
+                <a href="${pageContext.request.contextPath}/filieres/create" class="btn bg-primary mb-4">Ajouter Filiere</a>
                 <div class="card border-0">
                     <div class="card-header">
                         <h5 class="card-title">
-                            Table Des Etudiants
+                            Table Des Filieres
                         </h5>
                     </div>
                     <div class="card-body">
@@ -34,24 +34,22 @@
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">email</th>
-                                <th scope="col">cin</th>
+                                <th scope="col">libelle</th>
+                                <th scope="col">description</th>
                                 <th scope="col">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             <!-- Loop through the students and generate table rows -->
-                            <c:forEach items="${students.content}" var="student">
+                            <c:forEach items="${filieres.content}" var="filiere">
                                 <tr>
-                                    <td>${student.id}</td>
-                                    <td>${student.prenom + ' '+ student.nom}</td>
-                                    <td>${student.email}</td>
-                                    <td>${student.cin}</td>
+                                    <td>${filiere.id}</td>
+                                    <td>${filiere.libelle}</td>
+                                    <td>${filiere.description}</td>
                                     <td>
                                         <div class="gap-2">
-                                        <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/etudiants/delete?id=${student.id}" >Supprimer</a>
-                                        <a class="btn bg-success" href="${pageContext.request.contextPath}/etudiants/edit?id=${student.id}">Modifier</a></div>
+                                        <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/filieres/delete?id=${filiere.id}" >Supprimer</a>
+                                        <a class="btn bg-success" href="${pageContext.request.contextPath}/filieres/edit?id=${filiere.id}">Modifier</a></div>
                                     </td>
                                 </tr>
                             </c:forEach>
