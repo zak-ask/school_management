@@ -46,6 +46,7 @@ public class ModuleDao {
                         .id(rs.getLong("id"))
                         .description(rs.getString("description"))
                         .libelle(rs.getString("libelle"))
+                        .filiere(Filiere.builder().id((rs.getLong("id"))).build())
                         .build();
             }
             return null;
@@ -109,10 +110,23 @@ public class ModuleDao {
             throw new RuntimeException("Error :"+e.getCause());
         }
     }
-    public int delete(Module module){
+    public int update(Module module) {
+        try {
+            PreparedStatement ps2 = conn.prepareStatement("UPDATE modules SET libelle =? , description =?, semestre=?, filiere_id =?  WHERE id=?");
+            ps2.setString(1, module.getLibelle());
+            ps2.setString(2, module.getDescription());
+            ps2.setString(3, module.getSemestre());
+            ps2.setLong(4, module.getFiliere().getId());
+            return ps2.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException("Error :"+e.getCause());
+        }
+    }
+    public int delete(Long id){
         try {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM modules WHERE id = ?");
-            ps.setString(1, module.getLibelle());
+            ps.setLong(1, id);
             return ps.executeUpdate();
         }catch (SQLException e){
             throw new RuntimeException("Error :"+e.getCause());

@@ -2,9 +2,7 @@ package com.example.schoolapp.dao;
 
 import com.example.schoolapp.config.SingeltonConnection;
 import com.example.schoolapp.dto.PageDTO;
-import com.example.schoolapp.model.Etudiant;
 import com.example.schoolapp.model.Filiere;
-import com.example.schoolapp.model.Utilisateur;
 import com.example.schoolapp.utils.PageRequest;
 
 import java.sql.Connection;
@@ -14,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FiliereDao {
+public class NoteDao {
     private final Connection conn = SingeltonConnection.getConnection();
     public Filiere findByStudentId(Long studentId) {
         try {
@@ -115,14 +113,14 @@ public class FiliereDao {
     }
 
     public int update(Filiere filiere) {
-            try {
-                PreparedStatement ps2 = conn.prepareStatement("UPDATE filieres SET libelle =? , description =?  WHERE id=?");
-                ps2.setString(1, filiere.getLibelle());
-                ps2.setString(2, filiere.getDescription());
-                ps2.setLong(3, filiere.getId());
-                return ps2.executeUpdate();
-            }catch (SQLException e){
-                throw new RuntimeException("Error :"+e.getCause());
-            }
+        try {
+            PreparedStatement ps2 = conn.prepareStatement("UPDATE filieres SET libelle =? , description =?  WHERE id=?");
+            ps2.setString(1, filiere.getLibelle());
+            ps2.setString(2, filiere.getDescription());
+            ps2.setLong(3, filiere.getId());
+            return ps2.executeUpdate();
+        }catch (SQLException e){
+            throw new RuntimeException("Error :"+e.getCause());
+        }
     }
 }

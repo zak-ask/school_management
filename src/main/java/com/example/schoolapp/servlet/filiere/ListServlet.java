@@ -1,9 +1,7 @@
 package com.example.schoolapp.servlet.filiere;
 
-import com.example.schoolapp.metier.FiliereMetierImpl;
-import com.example.schoolapp.metier.IEtudiantMetier;
+import com.example.schoolapp.metier.impl.FiliereMetierImpl;
 import com.example.schoolapp.metier.IFiliereMetier;
-import com.example.schoolapp.metier.impl.EtudiantMetierImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

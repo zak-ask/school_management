@@ -1,7 +1,9 @@
-package com.example.schoolapp.servlet.module;
+package com.example.schoolapp.servlet.admin;
 
-import com.example.schoolapp.metier.impl.FiliereMetierImpl;
-import com.example.schoolapp.metier.IFiliereMetier;
+import com.example.schoolapp.metier.IAdminMetier;
+import com.example.schoolapp.metier.IEtudiantMetier;
+import com.example.schoolapp.metier.impl.AdminMetierImpl;
+import com.example.schoolapp.metier.impl.EtudiantMetierImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,12 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "moduleListServlet", value = "/modules")
+@WebServlet(name = "adListServlet", value = "/admins")
 public class ListServlet extends HttpServlet {
-    private IFiliereMetier moduleMetier;
+    private IAdminMetier adminMetier;
 
     public void init() {
-        moduleMetier = new FiliereMetierImpl();
+        adminMetier = new AdminMetierImpl();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
@@ -25,11 +27,11 @@ public class ListServlet extends HttpServlet {
                 ? Integer.parseInt(request.getParameter("page")) : 1;
         int size = request.getParameter("size") != null
                 ? Integer.parseInt(request.getParameter("page")) : 10;
-        request.setAttribute("modules", moduleMetier.page(page, size));
+        request.setAttribute("admins", adminMetier.page(page, size));
 
         // Forward the request to the JSP page
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/module/list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/list.jsp");
         dispatcher.forward(request, response);
     }
 }

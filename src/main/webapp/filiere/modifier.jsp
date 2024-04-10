@@ -19,7 +19,7 @@
     <jsp:include page="../navbar.jsp"/>
     <main class="content px-3 py-2">
       <div class="container-fluid">
-        <h1 class="my-5">Ajouter un etudiant</h1>
+        <h1 class="my-5">Modifier filiere</h1>
         <form method="post" action="${pageContext.request.contextPath}/filieres/edit" class="row g-3">
 
           <div class="mb-3 col-md-6">

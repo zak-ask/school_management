@@ -1,11 +1,11 @@
 package com.example.schoolapp.servlet.module;
 
-import com.example.schoolapp.metier.FiliereMetierImpl;
+import com.example.schoolapp.metier.impl.FiliereMetierImpl;
 import com.example.schoolapp.metier.IFiliereMetier;
 import com.example.schoolapp.metier.IModuleMetier;
 import com.example.schoolapp.metier.impl.ModuleMetierImpl;
-import com.example.schoolapp.model.Filiere;
 import com.example.schoolapp.model.Module;
+import com.example.schoolapp.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,9 +18,11 @@ import java.io.IOException;
 @WebServlet(name = "moduleUpdateServlet", value = "/modules/edit")
 public class UpdateServlet extends HttpServlet {
     private IModuleMetier moduleMetier;
+    private IFiliereMetier filiereMetier;
 
     public void init() {
         moduleMetier = new ModuleMetierImpl();
+        filiereMetier = new FiliereMetierImpl();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
@@ -29,7 +31,10 @@ public class UpdateServlet extends HttpServlet {
         // Forward the request to the JSP page
         Long id = request.getParameter("id") != null ? Long.valueOf(request.getParameter("id")) :
                 null;
+        request.setAttribute("filieres",filiereMetier.getAll());
         request.setAttribute("module",moduleMetier.get(id));
+
+        request.setAttribute("semstres", Constants.SEMESTRES);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/module/modifier.jsp");
         dispatcher.forward(request, response);
     }

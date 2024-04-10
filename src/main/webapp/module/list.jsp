@@ -48,8 +48,8 @@
                                     <td>${filiere.description}</td>
                                     <td>
                                         <div class="gap-2">
-                                        <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/filieres/delete?id=${filiere.id}" >Supprimer</a>
-                                        <a class="btn bg-success" href="${pageContext.request.contextPath}/filieres/edit?id=${filiere.id}">Modifier</a></div>
+                                        <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/filieres/delete?id=${filiere.id}" ><i class="fa-solid fa-trash"></i></a>
+                                        <a class="btn bg-success" href="${pageContext.request.contextPath}/filieres/edit?id=${filiere.id}"><i class="fa-solid fa-edit"></i></a></div>
                                     </td>
                                 </tr>
                             </c:forEach>

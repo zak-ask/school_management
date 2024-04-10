@@ -25,9 +25,21 @@
                 <a href="${pageContext.request.contextPath}/etudiants/create" class="btn bg-primary mb-4">Ajouter Etudiant</a>
                 <div class="card border-0">
                     <div class="card-header">
-                        <h5 class="card-title">
-                            Table Des Etudiants
-                        </h5>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h5 class="card-title">
+                                    Table Des Etudiants
+                                </h5>
+                            </div>
+                            <div class="row">
+                                <div class="col d-flex">
+                                    <div class="col">1/10</div>
+                                    <div><i class="fa fa-angle-left me-2"></i></div>
+                                    <div><i class="fa fa-angle-right"></i></div>
+                                </div>
+                                <div class="col">total rows : ${students.content.size()}</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -35,8 +47,8 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nom</th>
-                                <th scope="col">email</th>
                                 <th scope="col">cin</th>
+                                <th scope="col">email</th>
                                 <th scope="col">Actions</th>
                             </tr>
                             </thead>
@@ -45,13 +57,13 @@
                             <c:forEach items="${students.content}" var="student">
                                 <tr>
                                     <td>${student.id}</td>
-                                    <td>${student.prenom + ' '+ student.nom}</td>
-                                    <td>${student.email}</td>
+                                    <td>${student.prenom} ${student.nom}</td>
                                     <td>${student.cin}</td>
+                                    <td>${student.email}</td>
                                     <td>
                                         <div class="gap-2">
-                                        <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/etudiants/delete?id=${student.id}" >Supprimer</a>
-                                        <a class="btn bg-success" href="${pageContext.request.contextPath}/etudiants/edit?id=${student.id}">Modifier</a></div>
+                                        <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/etudiants/delete?id=${student.id}" ><i class="fa-solid fa-trash"></i></a>
+                                        <a class="btn bg-success" href="${pageContext.request.contextPath}/etudiants/edit?id=${student.id}"><i class="fa-solid fa-edit"></i></a></div>
                                     </td>
                                 </tr>
                             </c:forEach>

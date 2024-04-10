@@ -17,12 +17,14 @@ public class EtudiantMetierImpl implements IEtudiantMetier {
 
     @Override
     public Etudiant get(Long id) {
-        return null;
+        return dao.findById(id);
     }
 
     @Override
     public PageDTO<Etudiant> page(int page, int size) {
-        return dao.findAll(PageRequest.builder().page(page-1).size(size).build());
+        if (page > 0) page -= 1;
+        if (page < 0) page = 0;
+        return dao.findAll(PageRequest.builder().page(page).size(size).build());
     }
 
     @Override

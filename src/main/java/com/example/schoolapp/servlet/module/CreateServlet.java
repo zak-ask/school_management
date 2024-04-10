@@ -1,8 +1,12 @@
 package com.example.schoolapp.servlet.module;
 
-import com.example.schoolapp.metier.FiliereMetierImpl;
+import com.example.schoolapp.metier.impl.FiliereMetierImpl;
 import com.example.schoolapp.metier.IFiliereMetier;
+import com.example.schoolapp.metier.IModuleMetier;
+import com.example.schoolapp.metier.impl.ModuleMetierImpl;
 import com.example.schoolapp.model.Filiere;
+import com.example.schoolapp.model.Module;
+import com.example.schoolapp.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +18,20 @@ import java.io.IOException;
 
 @WebServlet(name = "moduleCreateServlet", value = "/modules/create")
 public class CreateServlet extends HttpServlet {
-    private IFiliereMetier moduleMetier;
+    private IFiliereMetier filiereMetier;
+    private IModuleMetier moduleMetier;
 
     public void init() {
-        moduleMetier = new FiliereMetierImpl();
+        filiereMetier = new FiliereMetierImpl();
+        moduleMetier = new ModuleMetierImpl();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
             ServletException {
 
         // Forward the request to the JSP page
+        request.setAttribute("filieres",filiereMetier.getAll());
+        request.setAttribute("semstres", Constants.SEMESTRES);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/module/ajouter.jsp");
         dispatcher.forward(request, response);
     }
@@ -31,16 +39,18 @@ public class CreateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Retrieve form data
+        Long id = Long.valueOf(req.getParameter("id"));
         String libelle = req.getParameter("libelle");
         String description = req.getParameter("description");
+        String semestre  = req.getParameter("semestre");
+        Long filiereId = Long.valueOf(req.getParameter("filiereId"));
 
-        // Create Etudiant object
-        Filiere module = new Filiere();
+        Module module = new Module();
         module.setLibelle(libelle);
         module.setDescription(description);
-
-        // Pass the Etudiant object to your service method
-        moduleMetier.create(module); // Replace with your actual service method
+        moduleMetier.create(Module.builder().id(id)
+                .filiere(Filiere.builder().id(filiereId).build())
+                .build());
         // Redirect the user to /modules
         resp.sendRedirect(req.getContextPath() + "/modules");
     }

@@ -1,6 +1,6 @@
 package com.example.schoolapp.servlet.etudiant;
 
-import com.example.schoolapp.metier.FiliereMetierImpl;
+import com.example.schoolapp.metier.impl.FiliereMetierImpl;
 import com.example.schoolapp.metier.IEtudiantMetier;
 import com.example.schoolapp.metier.IFiliereMetier;
 import com.example.schoolapp.metier.impl.EtudiantMetierImpl;
@@ -33,7 +33,7 @@ public class UpdateServlet extends HttpServlet {
         Etudiant etudiant = etudiantMetier.get(studentId);
         Filiere selectedFiliere = filiereMetier.getByStudentId(studentId);
         request.setAttribute("etudiant",etudiant);
-        request.setAttribute("selectedFiliere",selectedFiliere);
+//        request.setAttribute("selectedFiliere",selectedFiliere);
         request.setAttribute("filieres", filiereMetier.getAll());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/etudiant/modifier.jsp");
         dispatcher.forward(request, response);

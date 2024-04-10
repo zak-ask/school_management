@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Etudiants</title>
+    <title>Gestion des admins</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
@@ -22,11 +22,11 @@
         <main class="content px-3 py-2">
             <div class="container-fluid">
                 <!-- oussama this place is the start of tab -->
-                <a href="${pageContext.request.contextPath}/filieres/create" class="btn bg-primary mb-4">Ajouter Filiere</a>
+                <a href="${pageContext.request.contextPath}/admins/create" class="btn bg-primary mb-4">Ajouter Admin</a>
                 <div class="card border-0">
                     <div class="card-header">
                         <h5 class="card-title">
-                            Table Des Filieres
+                            Table Des admins
                         </h5>
                     </div>
                     <div class="card-body">
@@ -34,22 +34,22 @@
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">libelle</th>
-                                <th scope="col">description</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             <!-- Loop through the students and generate table rows -->
-                            <c:forEach items="${filieres.content}" var="filiere">
+                            <c:forEach items="${admins.content}" var="admin">
                                 <tr>
-                                    <td>${filiere.id}</td>
-                                    <td>${filiere.libelle}</td>
-                                    <td>${filiere.description}</td>
+                                    <td>${admin.id}</td>
+                                    <td>${admin.prenom} ${admin.nom}</td>
+                                    <td>${admin.email}</td>
                                     <td>
                                         <div class="gap-2">
-                                        <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/filieres/delete?id=${filiere.id}" ><i class="fa-solid fa-trash"></i></a>
-                                        <a class="btn bg-success" href="${pageContext.request.contextPath}/filieres/edit?id=${filiere.id}"><i class="fa-solid fa-edit"></i></a></div>
+                                        <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/admins/delete?id=${admin.id}" ><i class="fa-solid fa-trash"></i></a>
+                                        <a class="btn bg-success" href="${pageContext.request.contextPath}/admins/edit?id=${admin.id}"><i class="fa-solid fa-edit"></i></a></div>
                                     </td>
                                 </tr>
                             </c:forEach>

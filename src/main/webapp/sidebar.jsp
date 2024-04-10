@@ -20,6 +20,18 @@
                     Filieres
                 </a>
             </li>
+            <li class="sidebar-item">
+                <a href="${pageContext.request.contextPath}/modules" class="sidebar-link">
+                    <i class="fa-solid fa-list pe-2"></i>
+                    Modules
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="${pageContext.request.contextPath}/admins" class="sidebar-link">
+                    <i class="fa-solid fa-list pe-2"></i>
+                    Administrateur
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

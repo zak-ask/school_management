@@ -36,22 +36,27 @@
             <select name="filiereId" id="filiere" class="form-select">
               <option value="${selectedFiliere.id}" selected>${selectedFiliere.libelle}</option>
               <c:forEach items="${filieres}" var="filiere">
-                <c:if test="${filiere.id != selectedFiliere.id}">
-                  <option value="${filiere.id}">${filiere.libelle}</option>
-                </c:if>
+                <c:choose>
+                  <c:when test="${filiere.id eq module.filiere.id}">
+                    <option value="${filiere.id}" selected>${filiere.libelle}</option>
+                  </c:when>
+                  <c:otherwise>
+                    <option value="${filiere.id}">${filiere.libelle}</option>
+                  </c:otherwise>
+                </c:choose>
               </c:forEach>
             </select>
           </div>
           <div class="mb-3 col-md-6">
             <label for="semestre" class="form-label">Semestre</label>
-            <select name="semestreId" id="semestre" class="form-select">
-              <c:forEach var="semester" items="${semesters}">
+            <select name="semestre" id="semestre" class="form-select">
+              <c:forEach var="semestre" items="${semestres}">
                 <c:choose>
-                  <c:when test="${semester eq selectedSemester}">
-                    <option value="${semester}" selected>${semester}</option>
+                  <c:when test="${semestre eq module.semestre}">
+                    <option value="${semestre}" selected>${semestre}</option>
                   </c:when>
                   <c:otherwise>
-                    <option value="${semester}">${semester}</option>
+                    <option value="${semestre}">${semestre}</option>
                   </c:otherwise>
                 </c:choose>
               </c:forEach>
