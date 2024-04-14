@@ -27,7 +27,7 @@ public class EtudiantDao {
                 etudiant.setPrenom(rs.getString("prenom"));
                 etudiant.setEmail(rs.getString("email"));
                 etudiant.setCin(rs.getString("cin"));
-                etudiant.setFiliere(Filiere.builder().id(rs.getLong("id")).build());
+                etudiant.setFiliere(Filiere.builder().id(rs.getLong("filiere_id")).build());
                 return etudiant;
             }
             return null;
@@ -106,7 +106,7 @@ public class EtudiantDao {
     public Utilisateur findJoinedUser(Long id){
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM utilisateurs s " +
-                    "LEFT JOIN etudiants e ON s.id = e.utilisateur_id  WHERE s.id=?");
+                    "LEFT JOIN etudiants e ON s.id = e.utilisateur_id  WHERE e.id=?");
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()){

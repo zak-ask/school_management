@@ -2,10 +2,13 @@ package com.example.schoolapp.servlet.note;
 
 import com.example.schoolapp.metier.IFiliereMetier;
 import com.example.schoolapp.metier.IModuleMetier;
+import com.example.schoolapp.metier.INoteMetier;
 import com.example.schoolapp.metier.impl.FiliereMetierImpl;
 import com.example.schoolapp.metier.impl.ModuleMetierImpl;
+import com.example.schoolapp.metier.impl.NoteMetierImpl;
 import com.example.schoolapp.model.Filiere;
 import com.example.schoolapp.model.Module;
+import com.example.schoolapp.model.Note;
 import com.example.schoolapp.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
@@ -18,44 +21,29 @@ import java.io.IOException;
 
 @WebServlet(name = "noteUpdateServlet", value = "/notes/edit")
 public class UpdateServlet extends HttpServlet {
-    private IModuleMetier moduleMetier;
-    private IFiliereMetier filiereMetier;
+    private INoteMetier noteMetier;
 
     public void init() {
-        moduleMetier = new ModuleMetierImpl();
-        filiereMetier = new FiliereMetierImpl();
+        noteMetier = new NoteMetierImpl();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
             ServletException {
-
-        // Forward the request to the JSP page
-        Long id = request.getParameter("id") != null ? Long.valueOf(request.getParameter("id")) :
-                null;
-        request.setAttribute("filieres",filiereMetier.getAll());
-        request.setAttribute("module",moduleMetier.get(id));
-
-        request.setAttribute("semestres", Constants.SEMESTRES);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/module/modifier.jsp");
+        long noteId = Long.parseLong(request.getParameter("id"));
+        Note note = noteMetier.get(noteId);
+        request.setAttribute("note",note);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/note/modifier.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Retrieve form data
-        Long id = Long.valueOf(req.getParameter("id"));
-        String libelle = req.getParameter("libelle");
-        String description = req.getParameter("description");
-        String semestre = req.getParameter("semestre");
-        Long filiereId = Long.valueOf(req.getParameter("filiereId"));
-
-
-        Module module = new Module();
-        module.setLibelle(libelle);
-        module.setDescription(description);
-        module.setSemestre(semestre);
-        module.setFiliere(Filiere.builder().id(filiereId).build());
-        moduleMetier.update(module,id); // Replace with your actual service method
-        resp.sendRedirect(req.getContextPath() + "/modules");
+        double note = Double.parseDouble(req.getParameter("note"));
+        Long noteId = Long.parseLong(req.getParameter("note_id"));
+        Long etudiantId = Long.parseLong(req.getParameter("etudiant_id"));
+        Note noteModel = Note.builder().id(noteId).note(note).build();
+        noteMetier.update(noteModel,noteId);
+        resp.sendRedirect(req.getContextPath() + "/notes?etudiant_id="+ etudiantId);
     }
 }

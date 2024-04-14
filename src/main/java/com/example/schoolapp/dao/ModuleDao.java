@@ -17,27 +17,40 @@ public class ModuleDao {
     private final Connection conn = SingeltonConnection.getConnection();
     public Module findById(Long id) {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM modules WHERE id=?");
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT m.id as m_id, m.description as m_description, m.libelle as m_libelle, " +
+                    " m.semestre as m_semestre, f.id as f_id, f.libelle as f_libelle," +
+                    "f.description as f_description FROM modules m " +
+                    "LEFT JOIN filieres f ON f.id= m.filiere_id WHERE m.id=?");
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-
+            if(rs.next()){
+                Filiere filiere = Filiere.builder()
+                        .id(rs.getLong("f_id"))
+                        .libelle(rs.getString("f_libelle"))
+                        .description(rs.getString("f_description")).build();
                 return Module.builder()
-                        .id(rs.getLong("id"))
-                        .description(rs.getString("description"))
-                        .libelle(rs.getString("libelle"))
-                        .semestre(rs.getString("semestre"))
-                        .filiere(Filiere.builder().id((rs.getLong("id"))).build())
+                        .id(rs.getLong("m_id"))
+                        .description(rs.getString("m_description"))
+                        .libelle(rs.getString("m_libelle"))
+                        .semestre(rs.getString("m_semestre"))
+                        .filiere(filiere)
                         .build();
             }
             return null;
         }catch (SQLException e){
+            e.printStackTrace();
             throw new RuntimeException("Error :"+e.getCause());
         }
     }
     public PageDTO<Module> page(PageRequest pageRequest){
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM modules LIMIT ?,?");
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT m.id as m_id, m.description as m_description, m.libelle as m_libelle, " +
+                            " m.semestre as m_semestre, f.id as f_id, f.libelle as f_libelle," +
+                            "f.description as f_description FROM modules m " +
+                            "LEFT JOIN filieres f ON f.id= m.filiere_id "
+                    +"ORDER BY f.libelle LIMIT ?,?");
             ps.setLong(1, pageRequest.getOffset());
             ps.setLong(2, pageRequest.getOffset() + pageRequest.getSize());
             ResultSet rs = ps.executeQuery();
@@ -45,13 +58,18 @@ public class ModuleDao {
             pageDTO.setPage(pageRequest.getPage());
             pageDTO.setSize(pageRequest.getSize());
             while (rs.next()){
-
-                pageDTO.getContent().add(Module.builder()
-                        .id(rs.getLong("id"))
-                        .description(rs.getString("description"))
-                        .libelle(rs.getString("libelle"))
-                                .semestre(rs.getString("semestre"))
-                        .build());
+                Filiere filiere = Filiere.builder()
+                        .id(rs.getLong("f_id"))
+                        .libelle(rs.getString("f_libelle"))
+                        .description(rs.getString("f_description")).build();
+                Module module = Module.builder()
+                        .id(rs.getLong("m_id"))
+                        .description(rs.getString("m_description"))
+                        .libelle(rs.getString("m_libelle"))
+                        .semestre(rs.getString("m_semestre"))
+                        .filiere(filiere)
+                        .build();
+                pageDTO.getContent().add(module);
             }
             return pageDTO;
         }catch (SQLException e){

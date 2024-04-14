@@ -25,14 +25,14 @@
                 <div class="card border-0">
                     <div class="card-header">
                         <h5 class="card-title">
-                            Table Des Notes
+                            Table Des Notes pour l'étudiant ${notes.get(0).etudiant.nom} ${notes.get(0).etudiant.prenom}
                         </h5>
                     </div>
                     <div class="card-body">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">filiere</th>
+                                <th scope="col">filière</th>
                                 <th scope="col">module</th>
                                 <th scope="col">note</th>
                                 <th scope="col">Actions</th>
@@ -46,7 +46,7 @@
                                     <td>${note.module.libelle}</td>
                                     <c:choose>
                                         <c:when test="${note.id eq 0}">
-                                        <td>--</td>
+                                        <td>N/A</td>
                                         </c:when>
                                         <c:otherwise>
                                             <td>${note.note}</td>
@@ -54,13 +54,13 @@
                                     </c:choose>
                                     <td>
                                         <div class="gap-2">
-                                            <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/notes/delete?id=${note.id}" ><i class="fa-solid fa-trash"></i></a>
                                             <c:choose>
                                                 <c:when test="${note.id eq 0}">
-                                                    <a class="btn bg-success" href="${pageContext.request.contextPath}/notes/edit?id=${note.id}"><i class="fa-solid fa-edit"></i></a>
+                                                    <a class="btn bg-success" href="${pageContext.request.contextPath}/notes/create?module_id=${note.module.id}&etudiant_id=${note.etudiant.id}"><i class="fa-solid fa-edit"></i></a>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <a class="btn bg-success" href="${pageContext.request.contextPath}/notes/create?module_id=${note.module.id}&etudiant_id=${note.etudiant.id}"><i class="fa-solid fa-edit"></i></a>
+                                                    <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/notes/delete?id=${note.id}&etudiant_id=${notes.get(0).etudiant.id}" ><i class="fa-solid fa-trash"></i></a>
+                                                    <a class="btn bg-success" href="${pageContext.request.contextPath}/notes/edit?id=${note.id}"><i class="fa-solid fa-edit"></i></a>
                                                 </c:otherwise>
                                             </c:choose>
                                        </div>
