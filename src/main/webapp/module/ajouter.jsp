@@ -27,7 +27,11 @@
             <input type="text" class="form-control" id="libelle" name="libelle" required>
           </div>
           <div class="mb-3 col-md-6">
-            <label for="filiere" class="form-label">Filiere</label>
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" name="description" required>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="filiere" class="form-label">Filière</label>
             <select name="filiereId" id="filiere" class="form-select">
               <c:forEach items="${filieres}" var="filiere">
                 <option value="${filiere.id}">${filiere.libelle}</option>

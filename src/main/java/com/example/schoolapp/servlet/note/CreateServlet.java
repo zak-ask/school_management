@@ -1,8 +1,8 @@
-package com.example.schoolapp.servlet.module;
+package com.example.schoolapp.servlet.note;
 
-import com.example.schoolapp.metier.impl.FiliereMetierImpl;
 import com.example.schoolapp.metier.IFiliereMetier;
 import com.example.schoolapp.metier.IModuleMetier;
+import com.example.schoolapp.metier.impl.FiliereMetierImpl;
 import com.example.schoolapp.metier.impl.ModuleMetierImpl;
 import com.example.schoolapp.model.Filiere;
 import com.example.schoolapp.model.Module;
@@ -16,46 +16,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "moduleUpdateServlet", value = "/modules/edit")
-public class UpdateServlet extends HttpServlet {
-    private IModuleMetier moduleMetier;
+@WebServlet(name = "noteCreateServlet", value = "/notes/create")
+public class CreateServlet extends HttpServlet {
     private IFiliereMetier filiereMetier;
+    private IModuleMetier moduleMetier;
 
     public void init() {
-        moduleMetier = new ModuleMetierImpl();
         filiereMetier = new FiliereMetierImpl();
+        moduleMetier = new ModuleMetierImpl();
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException,
             ServletException {
-
         // Forward the request to the JSP page
-        Long id = request.getParameter("id") != null ? Long.valueOf(request.getParameter("id")) :
-                null;
-        request.setAttribute("filieres",filiereMetier.getAll());
-        request.setAttribute("module",moduleMetier.get(id));
-
-        request.setAttribute("semestres", Constants.SEMESTRES);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/module/modifier.jsp");
-        dispatcher.forward(request, response);
+        String libelle = req.getParameter("libelle");
+        String description = req.getParameter("description");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/module/ajouter.jsp");
+        dispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Retrieve form data
-        Long id = Long.valueOf(req.getParameter("id"));
         String libelle = req.getParameter("libelle");
         String description = req.getParameter("description");
-        String semestre = req.getParameter("semestre");
+        String semestre  = req.getParameter("semestre");
         Long filiereId = Long.valueOf(req.getParameter("filiereId"));
-
 
         Module module = new Module();
         module.setLibelle(libelle);
         module.setDescription(description);
-        module.setSemestre(semestre);
-        module.setFiliere(Filiere.builder().id(filiereId).build());
-        moduleMetier.update(module,id); // Replace with your actual service method
+        moduleMetier.create(Module.builder().semestre(semestre)
+                        .libelle(libelle).description(description)
+                .filiere(Filiere.builder().id(filiereId).build())
+                .build());
+        // Redirect the user to /modules
         resp.sendRedirect(req.getContextPath() + "/modules");
     }
 }

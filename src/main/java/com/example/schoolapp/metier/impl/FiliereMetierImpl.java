@@ -33,7 +33,7 @@ public class FiliereMetierImpl implements IFiliereMetier {
 
     @Override
     public Filiere update(Filiere dto, Long id) {
-        dao.update(dto);
+        dao.update(dto, id);
         return dto;
     }
 

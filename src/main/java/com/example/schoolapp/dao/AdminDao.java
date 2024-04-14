@@ -4,6 +4,7 @@ import com.example.schoolapp.config.SingeltonConnection;
 import com.example.schoolapp.dto.PageDTO;
 import com.example.schoolapp.model.Admin;
 import com.example.schoolapp.model.Filiere;
+import com.example.schoolapp.model.Utilisateur;
 import com.example.schoolapp.utils.PageRequest;
 
 import java.sql.Connection;
@@ -27,6 +28,7 @@ public class AdminDao {
                 admin.setNom(rs.getString("nom"));
                 admin.setPrenom(rs.getString("prenom"));
                 admin.setEmail(rs.getString("email"));
+                admin.setUtilisateurId(rs.getLong("utilisateur_id"));
 
                 return admin;
             }
@@ -79,23 +81,19 @@ public class AdminDao {
             throw new RuntimeException("Error :"+e.getCause());
         }
     }
-    public int update(Filiere filiere){
-        try {
-            PreparedStatement ps = conn.prepareStatement("UPDATE admins SET libelle =?1 , discription=?2, WHERE id=?3");
-            ps.setString(1, filiere.getLibelle());
-            ps.setString(2, filiere.getDescription());
-            ps.setLong(3, filiere.getId());
-            return ps.executeUpdate();
-        }catch (SQLException e){
-            throw new RuntimeException("Error :"+e.getCause());
-        }
+    public void update(Admin admin, Long id){
+        Utilisateur utilisateur = findById(id);
+        utilisateurDao.update(admin, utilisateur.getId());
     }
-    public int delete(Filiere filiere) {
+    public int delete(Long id) {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM admins WHERE id = ?1");
-            ps.setString(1, filiere.getLibelle());
+            Utilisateur utilisateur = findById(id);
+            utilisateurDao.delete(utilisateur.getId());
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM admins WHERE id = ?");
+            ps.setLong(1, id);
             return ps.executeUpdate();
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException("Error :" + e.getCause());
         }
     }

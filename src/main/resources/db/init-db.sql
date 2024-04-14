@@ -41,8 +41,7 @@ CREATE TABLE IF NOT EXISTS etudiants(
 
 CREATE TABLE IF NOT EXISTS notes(
                                     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                                    libelle varchar(100) NOT NULL,
-                                    description varchar(255) DEFAULT NULL,
+                                    note DOUBLE DEFAULT NULL,
                                     module_id INT NOT NULL,
                                     etudiant_id INT NOT NULL,
                                     FOREIGN KEY (etudiant_id) REFERENCES etudiants(id),

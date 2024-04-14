@@ -20,7 +20,7 @@
     <main class="content px-3 py-2">
       <div class="container-fluid">
         <h1 class="my-5">Modifier un admin</h1>
-        <form method="post" action="${pageContext.request.contextPath}/admins/create" class="row g-3">
+        <form method="post" action="${pageContext.request.contextPath}/admins/edit" class="row g-3">
           <input type="hidden" class="form-control" id="id" name="id" value="${admin.id}" required>
           <div class="mb-3 col-md-6">
             <label for="nom" class="form-label">Nom</label>
@@ -31,16 +31,12 @@
             <input type="text" class="form-control" id="prenom" name="prenom" value="${admin.prenom}" required>
           </div>
           <div class="mb-3 col-md-6">
-            <label for="cin" class="form-label">CIN</label>
-            <input type="text" class="form-control" id="cin" name="cin" value="${admin.nom}" required>
-          </div>
-          <div class="mb-3 col-md-6">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" value="${admin.email}" readonly required>
           </div>
 
           <div class="col-12 d-flex m-4 gap-4">
-            <a type="submit" class="btn btn-primary px-4">Ajouter</a>
+            <button type="submit" class="btn btn-primary px-4">Modifier</button>
             <a href="${pageContext.request.contextPath}/admins" type="submit" class="btn btn-danger px-4 ">Annuler</a>
           </div>
         </form>

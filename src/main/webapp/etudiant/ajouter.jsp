@@ -19,7 +19,7 @@
     <jsp:include page="../navbar.jsp"/>
     <main class="content px-3 py-2">
       <div class="container-fluid">
-        <h1 class="my-5">Ajouter un etudiant</h1>
+        <h1 class="my-5">Ajouter étudiant</h1>
         <form method="post" action="${pageContext.request.contextPath}/etudiants/create" class="row g-3">
 
           <div class="mb-3 col-md-6">
@@ -35,7 +35,7 @@
             <input type="text" class="form-control" id="cin" name="cin" required>
           </div>
           <div class="mb-3 col-md-6">
-            <label for="filiere" class="form-label">Filiere</label>
+            <label for="filiere" class="form-label">Filière</label>
             <select name="filiereId" id="filiere" class="form-select">
               <c:forEach items="${filieres}" var="filiere">
                 <option value="${filiere.id}">${filiere.libelle}</option>

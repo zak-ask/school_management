@@ -9,6 +9,12 @@
                 Les Modules de gestion
             </li>
             <li class="sidebar-item">
+                <a href="${pageContext.request.contextPath}/admins" class="sidebar-link">
+                    <i class="fa-solid fa-list pe-2"></i>
+                    Administrateurs
+                </a>
+            </li>
+            <li class="sidebar-item">
                 <a href="${pageContext.request.contextPath}/etudiants" class="sidebar-link">
                     <i class="fa-solid fa-list pe-2"></i>
                     Etudiants
@@ -27,11 +33,12 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="${pageContext.request.contextPath}/admins" class="sidebar-link">
+                <a href="${pageContext.request.contextPath}/notes" class="sidebar-link">
                     <i class="fa-solid fa-list pe-2"></i>
-                    Administrateur
+                    Notes
                 </a>
             </li>
+
         </ul>
     </div>
 </aside>

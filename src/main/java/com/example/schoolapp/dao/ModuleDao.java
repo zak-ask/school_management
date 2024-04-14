@@ -15,26 +15,6 @@ import java.util.List;
 
 public class ModuleDao {
     private final Connection conn = SingeltonConnection.getConnection();
-    public Module findByStudentId(Long studentId) {
-        try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM modules WHERE etudiant_id=?");
-            ps.setLong(1,studentId);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-
-                return Module.builder()
-                        .id(rs.getLong("id"))
-                        .description(rs.getString("description"))
-                        .libelle(rs.getString("libelle"))
-                        .semestre(rs.getString("semestre"))
-                        .filiere(Filiere.builder().id(rs.getLong("filiere_id")).build())
-                        .build();
-            }
-            return null;
-        }catch (SQLException e){
-            throw new RuntimeException("Error :"+e.getCause());
-        }
-    }
     public Module findById(Long id) {
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM modules WHERE id=?");
@@ -46,6 +26,7 @@ public class ModuleDao {
                         .id(rs.getLong("id"))
                         .description(rs.getString("description"))
                         .libelle(rs.getString("libelle"))
+                        .semestre(rs.getString("semestre"))
                         .filiere(Filiere.builder().id((rs.getLong("id"))).build())
                         .build();
             }
@@ -69,29 +50,10 @@ public class ModuleDao {
                         .id(rs.getLong("id"))
                         .description(rs.getString("description"))
                         .libelle(rs.getString("libelle"))
+                                .semestre(rs.getString("semestre"))
                         .build());
             }
             return pageDTO;
-        }catch (SQLException e){
-            throw new RuntimeException("Error :"+e.getCause());
-        }
-    }
-    public List<Module> findAll(){
-        try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM modules");
-            ResultSet rs = ps.executeQuery();
-            List<Module> filiereList = new ArrayList<>();
-            while (rs.next()){
-
-                filiereList.add(Module.builder()
-                        .id(rs.getLong("id"))
-                        .description(rs.getString("description"))
-                        .libelle(rs.getString("libelle"))
-                        .semestre(rs.getString("semestre"))
-                        .filiere(Filiere.builder().id(rs.getLong("filiere_id")).build())
-                        .build());
-            }
-            return filiereList;
         }catch (SQLException e){
             throw new RuntimeException("Error :"+e.getCause());
         }
@@ -110,13 +72,14 @@ public class ModuleDao {
             throw new RuntimeException("Error :"+e.getCause());
         }
     }
-    public int update(Module module) {
+    public int update(Module module, Long id) {
         try {
             PreparedStatement ps2 = conn.prepareStatement("UPDATE modules SET libelle =? , description =?, semestre=?, filiere_id =?  WHERE id=?");
             ps2.setString(1, module.getLibelle());
             ps2.setString(2, module.getDescription());
             ps2.setString(3, module.getSemestre());
             ps2.setLong(4, module.getFiliere().getId());
+            ps2.setLong(5,id);
             return ps2.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();

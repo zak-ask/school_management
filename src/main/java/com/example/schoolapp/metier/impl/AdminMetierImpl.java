@@ -5,13 +5,16 @@ import com.example.schoolapp.dao.UtilisateurDao;
 import com.example.schoolapp.model.Admin;
 import com.example.schoolapp.dto.PageDTO;
 import com.example.schoolapp.metier.IAdminMetier;
+import com.example.schoolapp.model.Utilisateur;
 import com.example.schoolapp.utils.PageRequest;
 import com.example.schoolapp.utils.PasswordHashing;
 
 public class AdminMetierImpl implements IAdminMetier {
     private final AdminDao dao;
+    private final UtilisateurDao utilisateurDao;
     public AdminMetierImpl(){
         dao = new AdminDao();
+        utilisateurDao = new UtilisateurDao();
     }
 
     @Override
@@ -37,11 +40,12 @@ public class AdminMetierImpl implements IAdminMetier {
 
     @Override
     public Admin update(Admin dto, Long id) {
-        return null;
+        dao.update(dto, id);
+        return dto;
     }
 
     @Override
     public void delete(Long id) {
-
+        dao.delete(id);
     }
 }

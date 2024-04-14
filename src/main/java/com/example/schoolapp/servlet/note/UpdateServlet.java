@@ -1,8 +1,8 @@
-package com.example.schoolapp.servlet.module;
+package com.example.schoolapp.servlet.note;
 
-import com.example.schoolapp.metier.impl.FiliereMetierImpl;
 import com.example.schoolapp.metier.IFiliereMetier;
 import com.example.schoolapp.metier.IModuleMetier;
+import com.example.schoolapp.metier.impl.FiliereMetierImpl;
 import com.example.schoolapp.metier.impl.ModuleMetierImpl;
 import com.example.schoolapp.model.Filiere;
 import com.example.schoolapp.model.Module;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "moduleUpdateServlet", value = "/modules/edit")
+@WebServlet(name = "noteUpdateServlet", value = "/notes/edit")
 public class UpdateServlet extends HttpServlet {
     private IModuleMetier moduleMetier;
     private IFiliereMetier filiereMetier;

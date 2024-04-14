@@ -29,7 +29,7 @@ public class ModuleMetierImpl implements IModuleMetier {
     @Override
     public Module update(Module dto, Long id) {
         dto.setId(id);
-        dao.update(dto);
+        dao.update(dto, id);
         return dto;
     }
 

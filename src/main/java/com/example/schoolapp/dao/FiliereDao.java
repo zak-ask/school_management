@@ -114,12 +114,12 @@ public class FiliereDao {
         }
     }
 
-    public int update(Filiere filiere) {
+    public int update(Filiere filiere, Long id) {
             try {
                 PreparedStatement ps2 = conn.prepareStatement("UPDATE filieres SET libelle =? , description =?  WHERE id=?");
                 ps2.setString(1, filiere.getLibelle());
                 ps2.setString(2, filiere.getDescription());
-                ps2.setLong(3, filiere.getId());
+                ps2.setLong(3, id);
                 return ps2.executeUpdate();
             }catch (SQLException e){
                 throw new RuntimeException("Error :"+e.getCause());

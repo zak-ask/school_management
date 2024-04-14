@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Etudiants</title>
+    <title>Gestion des étudiants</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
@@ -49,6 +49,7 @@
                                 <th scope="col">Nom</th>
                                 <th scope="col">cin</th>
                                 <th scope="col">email</th>
+                                <th scope="col">Gestion des notes</th>
                                 <th scope="col">Actions</th>
                             </tr>
                             </thead>
@@ -60,6 +61,7 @@
                                     <td>${student.prenom} ${student.nom}</td>
                                     <td>${student.cin}</td>
                                     <td>${student.email}</td>
+                                    <td><a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/notes?etudiant_id=${student.id}" ><i class="fa-solid fa-trash"></i></a></td>
                                     <td>
                                         <div class="gap-2">
                                         <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/etudiants/delete?id=${student.id}" ><i class="fa-solid fa-trash"></i></a>

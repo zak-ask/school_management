@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Etudiants</title>
+    <title>Gestion des notes</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
@@ -22,36 +22,48 @@
         <main class="content px-3 py-2">
             <div class="container-fluid">
                 <!-- oussama this place is the start of tab -->
-                <a href="${pageContext.request.contextPath}/modules/create" class="btn bg-primary mb-4">Ajouter Module</a>
                 <div class="card border-0">
                     <div class="card-header">
                         <h5 class="card-title">
-                            Table Des Modules
+                            Table Des Notes
                         </h5>
                     </div>
                     <div class="card-body">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">libelle</th>
-                                <th scope="col">description</th>
-                                <th scope="col">semestre</th>
+                                <th scope="col">filiere</th>
+                                <th scope="col">module</th>
+                                <th scope="col">note</th>
                                 <th scope="col">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             <!-- Loop through the students and generate table rows -->
-                            <c:forEach items="${modules.content}" var="module">
+                            <c:forEach items="${notes}" var="note">
                                 <tr>
-                                    <td>${module.id}</td>
-                                    <td>${module.libelle}</td>
-                                    <td>${module.description}</td>
-                                    <td>${module.semestre}</td>
+                                    <td>${note.module.filiere.libelle}</td>
+                                    <td>${note.module.libelle}</td>
+                                    <c:choose>
+                                        <c:when test="${note.id eq 0}">
+                                        <td>--</td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td>${note.note}</td>
+                                        </c:otherwise>
+                                    </c:choose>
                                     <td>
                                         <div class="gap-2">
-                                        <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/modules/delete?id=${module.id}" ><i class="fa-solid fa-trash"></i></a>
-                                        <a class="btn bg-success" href="${pageContext.request.contextPath}/modules/edit?id=${module.id}"><i class="fa-solid fa-edit"></i></a></div>
+                                            <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/notes/delete?id=${note.id}" ><i class="fa-solid fa-trash"></i></a>
+                                            <c:choose>
+                                                <c:when test="${note.id eq 0}">
+                                                    <a class="btn bg-success" href="${pageContext.request.contextPath}/notes/edit?id=${note.id}"><i class="fa-solid fa-edit"></i></a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a class="btn bg-success" href="${pageContext.request.contextPath}/notes/create?module_id=${note.module.id}&etudiant_id=${note.etudiant.id}"><i class="fa-solid fa-edit"></i></a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                       </div>
                                     </td>
                                 </tr>
                             </c:forEach>

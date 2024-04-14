@@ -26,36 +26,22 @@
                 class="img-fluid" alt="Phone image">
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-            <h2>Login page</h2>
+            <h2>Login</h2>
               <form>
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                  <input type="email" id="form1Example13" class="form-control form-control-lg" />
-                  <label class="form-label" for="form1Example13">Email address</label>
+                    <label class="form-label" for="form1Example13">Email</label>
+                    <input type="email" id="form1Example13" class="form-control form-control-lg" />
                 </div>
       
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                  <input type="password" id="form1Example23" class="form-control form-control-lg" />
-                  <label class="form-label" for="form1Example23">Password</label>
+                    <label class="form-label" for="form1Example23">Password</label>
+                    <input type="password" id="form1Example23" class="form-control form-control-lg" />
                 </div>
       
                 <div class="d-flex justify-content-around align-items-center mb-4">
-                  <!-- Checkbox -->
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                    <label class="form-check-label" for="form1Example3"> Remember me </label>
-                  </div>
-                  <a href="#!">Forgot password?</a>
-                </div>
-      
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button><br><br>
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/" role="button">Back to Home</a>
-      
-                <div class="divider d-flex align-items-center my-4">
-                  <p class="text-center fw-bold mx-3 mb-0 text-muted">Created by Ensa genius</p>
-                  <a type="button" class="btn btn-outline-primary" href="${pageContext.request.contextPath}/register">Signe Up</a>
+                  <a href="#">Forgot password?</a>
                 </div>
               </form>
             </div>

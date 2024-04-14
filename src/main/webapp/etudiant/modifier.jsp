@@ -19,7 +19,7 @@
     <jsp:include page="../navbar.jsp"/>
     <main class="content px-3 py-2">
       <div class="container-fluid">
-        <h1 class="my-5">Modifier etudiant</h1>
+        <h1 class="my-5">Modifier étudiant</h1>
         <form method="post" action="${pageContext.request.contextPath}/etudiants/create" class="row g-3">
           <input type="hidden" class="form-control" id="id" name="id" value="${etudiant.id}" required>
           <div class="mb-3 col-md-6">
@@ -56,7 +56,7 @@
           </div>
 
           <div class="col-12 d-flex m-4 gap-4">
-            <a type="submit" class="btn btn-primary px-4">Ajouter</a>
+            <button type="submit" class="btn btn-primary px-4">Modifier</button>
             <a href="${pageContext.request.contextPath}/etudiants" type="submit" class="btn btn-danger px-4 ">Annuler</a>
           </div>
         </form>

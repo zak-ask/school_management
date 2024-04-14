@@ -31,7 +31,7 @@ public class CreateServlet extends HttpServlet {
 
         // Forward the request to the JSP page
         request.setAttribute("filieres",filiereMetier.getAll());
-        request.setAttribute("semstres", Constants.SEMESTRES);
+        request.setAttribute("semestres", Constants.SEMESTRES);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/module/ajouter.jsp");
         dispatcher.forward(request, response);
     }
@@ -39,7 +39,6 @@ public class CreateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Retrieve form data
-        Long id = Long.valueOf(req.getParameter("id"));
         String libelle = req.getParameter("libelle");
         String description = req.getParameter("description");
         String semestre  = req.getParameter("semestre");
@@ -48,7 +47,8 @@ public class CreateServlet extends HttpServlet {
         Module module = new Module();
         module.setLibelle(libelle);
         module.setDescription(description);
-        moduleMetier.create(Module.builder().id(id)
+        moduleMetier.create(Module.builder().semestre(semestre)
+                        .libelle(libelle).description(description)
                 .filiere(Filiere.builder().id(filiereId).build())
                 .build());
         // Redirect the user to /modules

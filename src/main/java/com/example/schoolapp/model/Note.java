@@ -1,16 +1,14 @@
 package com.example.schoolapp.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Note {
-    private Integer id;
+    private Long id;
     private Double note;
     private Etudiant etudiant;
     private Module module;

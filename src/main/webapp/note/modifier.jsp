@@ -19,8 +19,8 @@
     <jsp:include page="../navbar.jsp"/>
     <main class="content px-3 py-2">
       <div class="container-fluid">
-        <h1 class="my-5">Modifier filière</h1>
-        <form method="post" action="${pageContext.request.contextPath}/filieres/edit" class="row g-3">
+        <h1 class="my-5">Modifier notes</h1>
+        <form method="post" action="${pageContext.request.contextPath}/notes/edit" class="row g-3">
 
           <div class="mb-3 col-md-6">
             <input type="hidden" class="form-control" id="id" name="id" value="${filiere.id}" required>
