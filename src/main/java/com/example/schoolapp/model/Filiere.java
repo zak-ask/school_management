@@ -17,5 +17,5 @@ public class Filiere {
     private String libelle;
     private String description;
     private List<Etudiant> etudiantList;
-    private List<Programme> programmeList;
+    private List<Module> moduleList;
 }

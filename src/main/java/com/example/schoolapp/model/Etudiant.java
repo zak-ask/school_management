@@ -11,8 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter @Setter
 public class Etudiant extends Utilisateur {
+    private Long utilisateurId;
     private String cin;
-    private int age;
     private Filiere filiere;
     private List<Note> notes;
 }

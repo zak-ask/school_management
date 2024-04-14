@@ -1,6 +1,8 @@
 package com.example.schoolapp.servlet;
 
+import com.example.schoolapp.metier.ICompteMetier;
 import com.example.schoolapp.metier.IEtudiantMetier;
+import com.example.schoolapp.metier.impl.CompteMetierImpl;
 import com.example.schoolapp.metier.impl.EtudiantMetierImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -13,8 +15,10 @@ import java.io.IOException;
 
 @WebServlet(name = "loginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
+    ICompteMetier compteMetier;
 
     public void init() {
+        compteMetier = new CompteMetierImpl();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,

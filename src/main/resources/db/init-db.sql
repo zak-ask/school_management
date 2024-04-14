@@ -6,31 +6,18 @@ CREATE TABLE IF NOT EXISTS filieres(
                                        description varchar(255) DEFAULT NULL
 );
 
-CREATE TABLE IF NOT EXISTS semestres(
-                                        id int not null AUTO_INCREMENT PRIMARY KEY,
-                                        libelle varchar(255) NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS modules(
-                                      id INT NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE,
+                                      id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                                       libelle varchar(100) NOT NULL,
-                                      description varchar(255) DEFAULT NULL
+                                      description varchar(255) DEFAULT NULL,
+                                      semestre varchar(10) DEFAULT NULL,
+                                      filiere_id int not null ,
+                                      FOREIGN KEY (filiere_id) REFERENCES filieres(id)
 );
 
-CREATE TABLE IF NOT EXISTS programmes(
-                                         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE,
-                                         date_debut DATE NOT NULL,
-                                         date_fin DATE NOT NULL,
-                                         filiere_id INT,
-                                         module_id INT,
-                                         semestre_id INT,
-                                         FOREIGN KEY (module_id) REFERENCES modules(id),
-                                         FOREIGN KEY (filiere_id) REFERENCES filieres(id),
-                                         FOREIGN KEY (semestre_id) REFERENCES semestres(id)
-);
 
 CREATE TABLE IF NOT EXISTS utilisateurs(
-                                           id int not null AUTO_INCREMENT PRIMARY KEY UNIQUE,
+                                           id int not null AUTO_INCREMENT PRIMARY KEY,
                                            nom varchar(80) CHARACTER SET UTF8,
                                            prenom varchar(80) CHARACTER SET UTF8,
                                            email varchar(80) CHARACTER SET UTF8,
@@ -38,26 +25,25 @@ CREATE TABLE IF NOT EXISTS utilisateurs(
 );
 
 CREATE TABLE IF NOT EXISTS admins(
-                                     id int not null AUTO_INCREMENT PRIMARY KEY UNIQUE,
-                                     utilisateur_id int not null UNIQUE,
+                                     id int not null AUTO_INCREMENT PRIMARY KEY,
+                                     utilisateur_id int not null ,
                                      FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
 );
 
 CREATE TABLE IF NOT EXISTS etudiants(
-                                        id int not null AUTO_INCREMENT PRIMARY KEY UNIQUE,
+                                        id int not null AUTO_INCREMENT PRIMARY KEY,
                                         cin varchar(30) CHARACTER SET UTF8,
                                         filiere_id INT DEFAULT NULL,
                                         utilisateur_id int not null UNIQUE,
                                         FOREIGN KEY (filiere_id) REFERENCES filieres(id),
-                                            FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
+                                        FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id)
 );
 
 CREATE TABLE IF NOT EXISTS notes(
-                                    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE,
-                                    libelle varchar(100) NOT NULL,
-                                    description varchar(255) DEFAULT NULL,
-                                    programme_id INT NOT NULL,
+                                    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                    note DOUBLE DEFAULT NULL,
+                                    module_id INT NOT NULL,
                                     etudiant_id INT NOT NULL,
-                                    FOREIGN KEY (programme_id) REFERENCES programmes(id),
-                                    FOREIGN KEY (etudiant_id) REFERENCES etudiants(id)
+                                    FOREIGN KEY (etudiant_id) REFERENCES etudiants(id),
+                                    FOREIGN KEY (module_id) REFERENCES modules(id)
 );
