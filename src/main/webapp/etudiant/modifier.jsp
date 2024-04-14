@@ -20,7 +20,7 @@
     <main class="content px-3 py-2">
       <div class="container-fluid">
         <h1 class="my-5">Modifier étudiant</h1>
-        <form method="post" action="${pageContext.request.contextPath}/etudiants/create" class="row g-3">
+        <form method="post" action="${pageContext.request.contextPath}/etudiants/edit" class="row g-3">
           <input type="hidden" class="form-control" id="id" name="id" value="${etudiant.id}" required>
           <div class="mb-3 col-md-6">
             <label for="nom" class="form-label">Nom</label>
@@ -32,7 +32,7 @@
           </div>
           <div class="mb-3 col-md-6">
             <label for="cin" class="form-label">CIN</label>
-            <input type="text" class="form-control" id="cin" name="cin" value="${etudiant.nom}" required>
+            <input type="text" class="form-control" id="cin" name="cin" value="${etudiant.cin}" required>
           </div>
           <div class="mb-3 col-md-6">
             <label for="filiere" class="form-label">Filiere</label>

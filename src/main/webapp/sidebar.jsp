@@ -32,12 +32,6 @@
                     Modules
                 </a>
             </li>
-            <li class="sidebar-item">
-                <a href="${pageContext.request.contextPath}/notes" class="sidebar-link">
-                    <i class="fa-solid fa-list pe-2"></i>
-                    Notes
-                </a>
-            </li>
 
         </ul>
     </div>

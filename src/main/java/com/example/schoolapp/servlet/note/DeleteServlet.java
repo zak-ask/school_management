@@ -1,7 +1,9 @@
 package com.example.schoolapp.servlet.note;
 
 import com.example.schoolapp.metier.IModuleMetier;
+import com.example.schoolapp.metier.INoteMetier;
 import com.example.schoolapp.metier.impl.ModuleMetierImpl;
+import com.example.schoolapp.metier.impl.NoteMetierImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,16 +14,17 @@ import java.io.IOException;
 
 @WebServlet(name = "noteDeleteServlet", value = "/notes/delete")
 public class DeleteServlet extends HttpServlet {
-    private IModuleMetier moduleMetier;
+    private INoteMetier noteMetier;
 
     public void init() {
-        moduleMetier = new ModuleMetierImpl();
+        noteMetier = new NoteMetierImpl();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
             ServletException {
         Long id = Long.valueOf(request.getParameter("id"));
-        moduleMetier.delete(id);
-        response.sendRedirect(request.getContextPath() + "/modules");
+        long etudiantId = Long.parseLong(request.getParameter("etudiant_id"));
+        noteMetier.delete(id);
+        response.sendRedirect(request.getContextPath() + "/notes?etudiant_id="+etudiantId);
     }
 }

@@ -36,6 +36,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">libelle</th>
                                 <th scope="col">description</th>
+                                <th scope="col">filière</th>
                                 <th scope="col">semestre</th>
                                 <th scope="col">Actions</th>
                             </tr>
@@ -47,6 +48,7 @@
                                     <td>${module.id}</td>
                                     <td>${module.libelle}</td>
                                     <td>${module.description}</td>
+                                    <td>${module.filiere.libelle}</td>
                                     <td>${module.semestre}</td>
                                     <td>
                                         <div class="gap-2">

@@ -49,7 +49,7 @@
                                 <th scope="col">Nom</th>
                                 <th scope="col">cin</th>
                                 <th scope="col">email</th>
-                                <th scope="col">Gestion des notes</th>
+                                <th scope="col">afficher notes</th>
                                 <th scope="col">Actions</th>
                             </tr>
                             </thead>
@@ -61,7 +61,7 @@
                                     <td>${student.prenom} ${student.nom}</td>
                                     <td>${student.cin}</td>
                                     <td>${student.email}</td>
-                                    <td><a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/notes?etudiant_id=${student.id}" ><i class="fa-solid fa-trash"></i></a></td>
+                                    <td><a class="btn bg-secondary me-2" href="${pageContext.request.contextPath}/notes?etudiant_id=${student.id}" ><i class="fa-solid fa-eye"></i></a></td>
                                     <td>
                                         <div class="gap-2">
                                         <a class="btn bg-danger me-2" href="${pageContext.request.contextPath}/etudiants/delete?id=${student.id}" ><i class="fa-solid fa-trash"></i></a>

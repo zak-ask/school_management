@@ -19,22 +19,25 @@
     <jsp:include page="../navbar.jsp"/>
     <main class="content px-3 py-2">
       <div class="container-fluid">
-        <h1 class="my-5">Modifier notes</h1>
+        <h1 class="my-5">Modifier note</h1>
+        <div class="card" >
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Etudiant: ${note.etudiant.nom} ${note.etudiant.prenom}</li>
+            <li class="list-group-item">Fileire: ${note.module.filiere.libelle}</li>
+            <li class="list-group-item">Module: ${note.module.libelle}  | ${note.module.semestre}</li>
+          </ul>
+        </div>
         <form method="post" action="${pageContext.request.contextPath}/notes/edit" class="row g-3">
 
           <div class="mb-3 col-md-6">
-            <input type="hidden" class="form-control" id="id" name="id" value="${filiere.id}" required>
-            <label for="libelle" class="form-label">Libelle</label>
-            <input type="text" class="form-control" id="libelle" name="libelle" value="${filiere.libelle}" required>
+            <input type="hidden" class="form-control" id="etudiant_id" name="etudiant_id" value="${note.etudiant.id}" readonly required>
+            <input type="hidden" class="form-control" id="note_id" name="note_id" value="${note.id}" readonly required>
+            <label for="note" class="form-label">Note</label>
+            <input type="text" class="form-control" id="note" name="note" value="${note.note}" required>
           </div>
-          <div class="mb-3 col-md-6">
-            <label for="description" class="form-label">Description</label>
-            <input type="text" class="form-control" id="description" name="description" value="${filiere.description}" required>
-          </div>
-
           <div class="col-12 d-flex m-4 gap-4">
             <button type="submit" class="btn btn-primary px-4">Modifier</button>
-            <a href="${pageContext.request.contextPath}/filieres" type="submit" class="btn btn-danger px-4 ">Annuler</a>
+            <a href="${pageContext.request.contextPath}/notes?etudiant_id=${note.etudiant.id}" type="submit" class="btn btn-danger px-4 ">Annuler</a>
           </div>
         </form>
       </div>
